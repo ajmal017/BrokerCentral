@@ -1,6 +1,8 @@
 from brokers.tda_wrapper import TDAWrapper
 import json
 
+print('Setup TD Ameritrade API')
+
 token_path = input('Enter your token path (/path/to/token.pickle): ')
 api_key = input('Enter your API Key (CONSUMERID@AMER.OAUTHAPP): ')
 redirect_uri = input('Enter the redirect uri: ')
