@@ -24,3 +24,20 @@ class TDAWrapper:
     def get_account_balance(self, id):
         data = self.c.get_account(id).json()
         return data['securitiesAccount']['currentBalances']['liquidationValue']
+
+    def _get_positions_dict(self, id):
+        data = self.c.get_account(id, fields=self.c.Account.Fields.POSITIONS).json()
+        return data['securitiesAccount']['positions']
+
+    def get_account_positions(self, id):
+        data = self._get_positions_dict(id)
+
+        options = []
+        stock = []
+        print(data)
+        for i in data:
+            if i['instrument']['assetType'] == 'OPTION':
+                options.append(i['instrument']['symbol'])
+            else:
+                stock.append(i['instrument']['symbol'])
+        return (stock, options)
