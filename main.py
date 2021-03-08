@@ -31,7 +31,7 @@ def main():
         sys.exit(1)
     #test_etrade(data)
     #test_tda(data)
-    tradier = Tradier('xmR5dYUE5Bdi6Cp8YZZafFOWzgJl')
+    tradier = Tradier(data['tradier']['token'])
     date = datetime.date(2021, 3, 19)
     tradier.get_option_quote('AAPL', date, 'call', 122)
 
