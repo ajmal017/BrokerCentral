@@ -23,5 +23,12 @@ class Tradier:
             headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
         )
         json_response = response.json()
-        print(response.status_code)
-        print(json_response)
+        return json_response
+
+    def get_option_quote_from_code(self, code):
+        response = requests.get(self.url + 'markets/quotes',
+            params={'symbols': code},
+            headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
+        )
+        json_response = response.json()
+        return json_response
