@@ -7,16 +7,18 @@ print('Setup TD Ameritrade API')
 token_path = input('Enter your token path (/path/to/token.pickle): ')
 api_key = input('Enter your API Key (CONSUMERID@AMER.OAUTHAPP): ')
 redirect_uri = input('Enter the redirect uri: ')
-
+tda = TDAWrapper(token_path, api_key, redirect_uri)
 print()
 
 print('Setup E*Trade API')
 consumer_key = input('Enter your consumer key: ')
 consumer_secret = input('Enter your consumer secret: ')
-
-tda = TDAWrapper(token_path, api_key, redirect_uri)
 etrade = ETradeWrapper(consumer_key, consumer_secret, setup=True)
 tokens = etrade.get_tokens()
+print()
+
+print('Setup Tradier API')
+tradier_token = input("Enter your app's token: ")
 
 config = {
     'tda': {
@@ -28,6 +30,9 @@ config = {
         'consumer_key': consumer_key,
         'consumer_secret': consumer_secret,
         'tokens': tokens
+    },
+    'tradier': {
+        'token': tradier_token
     }
 }
 
