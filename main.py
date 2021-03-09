@@ -33,7 +33,9 @@ def main():
     #test_tda(data)
     tradier = Tradier(data['tradier']['sandbox']['token'], account=data['tradier']['sandbox']['account'])
     code = tradier.get_option_code('AAPL', datetime.date(2021, 3, 12), 'call', 117)
-    print(tradier.place_option_order('AAPL', code, 1, 'buy_to_open', 'market', 'gtc'))
+    id = tradier.place_option_order('AAPL', code, 1, 'buy_to_open', 'market', 'gtc')['order']['id']
+    print(id)
+    print(tradier.get_order())
 
 if __name__ == "__main__":
     main()

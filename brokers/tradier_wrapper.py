@@ -35,8 +35,16 @@ class Tradier:
         return json_response
 
     def place_option_order(self, symbol, code, quantity, side, type, duration, price=0, stop=0):
-        response = requests.post(self.url + 'accounts/' +  str(self.account) + '/orders',
+        response = requests.post(self.url + 'accounts/' + str(self.account) + '/orders',
             data={'class': 'option', 'symbol': symbol, 'option_symbol': code, 'side': side, 'quantity': str(quantity), 'type': type, 'duration': duration, 'price': format(price, '.2f'), 'stop': format(stop, '.2f')},
+            headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
+            )
+        json_response = response.json()
+        return json_response
+
+    def get_order(self, id):
+        response = requests.get(self.url + 'accounts/' + str(self.account) + '/orders/' + str(id),
+            params={'includeTags': 'false'},
             headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
             )
         json_response = response.json()
