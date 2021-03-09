@@ -31,9 +31,9 @@ def main():
         sys.exit(1)
     #test_etrade(data)
     #test_tda(data)
-    tradier = Tradier(data['tradier']['token'])
-    date = datetime.date(2021, 3, 19)
-    tradier.get_option_quote('AAPL', date, 'call', 122)
+    tradier = Tradier(data['tradier']['sandbox']['token'], account=data['tradier']['sandbox']['account'])
+    code = tradier.get_option_code('AAPL', datetime.date(2021, 3, 12), 'call', 117)
+    print(tradier.place_option_order('AAPL', code, 1, 'buy_to_open', 'market', 'gtc'))
 
 if __name__ == "__main__":
     main()

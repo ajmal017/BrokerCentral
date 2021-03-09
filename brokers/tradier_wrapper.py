@@ -2,14 +2,15 @@ import requests
 import datetime
 
 class Tradier:
-    def __init__(self, token):
+    def __init__(self, token, sandbox=True, account=None):
         self.token = token
-        self.url = "https://sandbox.tradier.com/v1/"
+        self.url = "https://sandbox.tradier.com/v1/" if sandbox else "https://api.tradier.com/v1/"
+        self.account = account
 
     def get_option_code(self, symbol, date, type, strike):
         strike = float(strike)
         date = date.strftime('%y%m%d')
-        strike = str(strike).split('.')
+        strike = str(float(strike)).split('.')
         type = 'C' if type == 'call' else 'P'
         dollar = strike[0]
         cents = strike[1]
@@ -30,5 +31,13 @@ class Tradier:
             params={'symbols': code},
             headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
         )
+        json_response = response.json()
+        return json_response
+
+    def place_option_order(self, symbol, code, quantity, side, type, duration, price=0, stop=0):
+        response = requests.post(self.url + 'accounts/' +  str(self.account) + '/orders',
+            data={'class': 'option', 'symbol': symbol, 'option_symbol': code, 'side': side, 'quantity': str(quantity), 'type': type, 'duration': duration, 'price': format(price, '.2f'), 'stop': format(stop, '.2f')},
+            headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
+            )
         json_response = response.json()
         return json_response
