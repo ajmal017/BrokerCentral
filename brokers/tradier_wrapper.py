@@ -82,3 +82,16 @@ class Tradier:
             )
         json_response = response.json()
         return json_response
+
+    def get_account_positions(self):
+        '''
+        Gets account's positions
+        Input: None
+        Returns: Positions (JSON)
+        '''
+        response = requests.get(self.url + 'accounts/' + str(self.account) + '/positions',
+            params={},
+            headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
+            )
+        json_response = response.json()
+        return json_response

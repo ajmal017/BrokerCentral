@@ -35,7 +35,7 @@ def main():
     code = tradier.get_option_code('AAPL', datetime.date(2021, 3, 12), 'call', 117)
     #id = tradier.place_option_order('AAPL', code, 1, 'buy_to_open', 'market', 'gtc')['order']['id']
     #print(id)
-    print(tradier.get_option_quote_from_code(code)['quotes']['quote']['underlying'])
+    print(tradier.get_account_positions())
 
 if __name__ == "__main__":
     main()
