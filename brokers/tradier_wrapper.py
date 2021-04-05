@@ -94,8 +94,21 @@ class Tradier:
             headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
             )
         json_response = response.json()
-        return json_response
+        return json_response\
 
+    def cancel_order(self, id):
+        '''
+        Cancels placed order
+        Input: Order ID (Integer, ex: 123456)
+        Returns: None
+        '''
+        response = requests.delete(self.url + 'accounts/' + str(self.account) + '/orders/' + str(id),
+            params={'includeTags': 'false'},
+            headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
+            )
+        json_response = response.json()
+        return json_response
+        
     def get_account_positions(self):
         '''
         Gets account's positions
