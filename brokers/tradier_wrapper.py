@@ -103,12 +103,12 @@ class Tradier:
         Returns: None
         '''
         response = requests.delete(self.url + 'accounts/' + str(self.account) + '/orders/' + str(id),
-            params={'includeTags': 'false'},
+            data={},
             headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
             )
         json_response = response.json()
         return json_response
-        
+
     def get_account_positions(self):
         '''
         Gets account's positions
