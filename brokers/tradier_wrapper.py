@@ -83,6 +83,19 @@ class Tradier:
         json_response = response.json()
         return json_response
 
+    def get_all_orders(self):
+        '''
+        Gets all orders
+        Input: None
+        Returns: All order details (JSON)
+        '''
+        response = requests.get(self.url + 'accounts/' + str(self.account) + '/orders',
+            params={'includeTags': 'false'},
+            headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
+            )
+        json_response = response.json()
+        return json_response
+
     def get_account_positions(self):
         '''
         Gets account's positions
