@@ -121,3 +121,16 @@ class Tradier:
             )
         json_response = response.json()
         return json_response
+
+    def get_account_balances(self):
+        '''
+        Gets account's balances
+        Input: None
+        Returns: Positions (JSON)
+        '''
+        response = requests.get(self.url + 'accounts/' + str(self.account) + '/balances',
+            params={},
+            headers={'Authorization': 'Bearer ' + str(self.token), 'Accept': 'application/json'}
+            )
+        json_response = response.json()
+        return json_response
